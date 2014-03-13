@@ -59,3 +59,44 @@ function init(){
 	}
 
 }
+
+function ball(sx,sy,rad){
+	this.sx = sx;
+	this.sy = sy;
+	this.sxOld = sx;
+	this.syOld = sy;
+	this.dx = 0;
+	this.sx = 0;
+	this.rad = rad;
+	this.draw = drawBall;
+}
+
+function drawBall(){
+	contesto.drawImage(sprite2,this.sx,this.sy);
+}
+
+//Controllo stato, punteggi e parametri di configurazione
+var game = {
+	pause:false,
+	puntiPlayer1:0,
+	puntiPlayer2:0,
+	sound:true,
+	reset:resetGame,
+	computer:1,
+	diff:2,
+	start:false
+}
+
+function resetGame(){
+	myBall.dx = 0;
+	myBall.dy = 0;
+	myBallsy = canvasHeight - 200;
+	myBalldx = (canvasWidth / 2) +150;
+	myLeftPlayer.sx = 100;
+	myRightPlayer.sx = canvasWidth - 100;
+	this.puntiPlayer1 = 0;
+	this.puntiPlayer2 = 0;
+	
+	document.getElementById("Player1Score").innerHtml = 0;
+	document.getElementById("Player2Score").innerHtml = 0;
+}
