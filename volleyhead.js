@@ -1,3 +1,55 @@
+function FPS(){
+	var frameTime2 = new Date().getTime()-frameTime;
+		if(frameTime2 >= 1000){
+			fps = counter;
+			frameTime = new Date().getTime();
+			counter = 0;
+		}
+	counter++;	
+}
+
+//Controllo stato, punteggi e parametri di configurazione
+var game = {
+	pause:false,
+	puntiPlayer1:0,
+	puntiPlayer2:0,
+	sound:true,
+	reset:resetGame,
+	computer:1, //0:nessuno 1:left 2:right 3:entrambi computer
+	diff:2, //difficolta computer
+	start:false
+}
+
+function playSound(snd){
+	if(game.sound){
+		try{
+			if(snd.currentTime > 0) snd.currentTime = 0;
+			else sound.play();
+		}catch(e){}
+	}
+}
+
+function resetGame(){
+	myBall.dx = 0;
+	myBall.dy = 0;
+	myBallsy = canvasHeight - 200;
+	myBalldx = (canvasWidth / 2) +150;
+	myLeftPlayer.sx = 100;
+	myRightPlayer.sx = canvasWidth - 100;
+	this.puntiPlayer1 = 0;
+	this.puntiPlayer2 = 0;
+	
+	document.getElementById("Player1Score").innerHtml = 0;
+	document.getElementById("Player2Score").innerHtml = 0;
+}
+
+
+function dinamicaGiocatori(){
+	// Giocatori umani
+	if(myRightPlayer.sy <= canvasHeight - 80)myRightPlayer.sy -= myRightPlayer.vUp;
+}
+
+
 var canvas = document.getElementById("canvasvolley");
 
 var oggetti[];
@@ -75,28 +127,6 @@ function drawBall(){
 	contesto.drawImage(sprite2,this.sx,this.sy);
 }
 
-//Controllo stato, punteggi e parametri di configurazione
-var game = {
-	pause:false,
-	puntiPlayer1:0,
-	puntiPlayer2:0,
-	sound:true,
-	reset:resetGame,
-	computer:1,
-	diff:2,
-	start:false
-}
 
-function resetGame(){
-	myBall.dx = 0;
-	myBall.dy = 0;
-	myBallsy = canvasHeight - 200;
-	myBalldx = (canvasWidth / 2) +150;
-	myLeftPlayer.sx = 100;
-	myRightPlayer.sx = canvasWidth - 100;
-	this.puntiPlayer1 = 0;
-	this.puntiPlayer2 = 0;
-	
-	document.getElementById("Player1Score").innerHtml = 0;
-	document.getElementById("Player2Score").innerHtml = 0;
-}
+
+
