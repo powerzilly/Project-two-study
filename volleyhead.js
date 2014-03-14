@@ -47,6 +47,52 @@ function resetGame(){
 function dinamicaGiocatori(){
 	// Giocatori umani
 	if(myRightPlayer.sy <= canvasHeight - 80)myRightPlayer.sy -= myRightPlayer.vUp;
+	if(myRightPlayer.sy < canvasHeight - 80)myRightPlayer.vUP -= 0.6;
+	if(myRightPlayer.sy > canvasHeight - 80){myRightPlayer.sy = myRightPlayer.vUp = 0;}
+	
+	if(myLeftPlayer.sy <= canvasHeight - 80)myLeftPlayer.sy -= myLeftPlayer.vUP;
+	if(myLeftPlayer.sy <= canvasHeight - 80)myLeftPlayer.vUP -= 0.6;
+	if(myLeftPlayer.sy <= canvasHeight - 80){myLeftPlayer.sy = myLeftPlayer.vUP = 0;}
+	
+	//Computer
+	if((game.computer == 1) || (game.computer == 3)){
+		//Left
+		if(myBall.sx > myLeftPlayer.sx + 15){
+			if(myLeftPlayer.sx < (canvasWidth / 2)-70){
+				myLeftPlayer.sx += (8 + game.diff);
+				myLeftPlayer.pos++;
+			}
+		}
+		if(myBall.sx < myLeftPlayer.sx + 15){
+			if(myPLayer.sx > -5){
+				myLeftPlayer.sx -= (8 + game.diff);
+				myLeftPlayer.pos --;
+			}
+		}
+		if((myBall.sy > (canvasHeight - 260))&&(myBall.sx > myLeftPlayer.sx - 45)&&(myLeftPLayer.sx + 35)&&(myLeftPLayer.sy > (canvasHeight - 90))) myLeftPLayer.vUP = 17;
+	}
+	
+	if((game.computer == 2)||(game.computer == 3)){
+		//Right
+		if(myBall.sx > myRightPlayer.sx + 15){
+			if(myRightPLayer.sx < canvasWidth - 50){
+				myRightPlayer.sx += (8 + game.diff);
+				myRightPlayer.pos -= 1;
+			}
+		}
+		if(myBall.sx < myRightPlayer.sx +15){
+			if(myRightPlayer.sx > (canvasWidth / 2)){
+				myRightPlayer.sx -= (8 + game.diff);
+				myRightPlayer.pos += 1;
+			}
+		}
+		if((myBall.sy > (canvasHeight - 260))&&(myBall.sx > myRightPlayer.sx - 35)&&(myBall.sx < myRightPLayer.sx + 45)&&(myRightPlayer.sy > (canvasHeight - 90))) myRightPLayer.vUP = 17;
+		
+	}
+}
+
+function drawBall(){
+	contesto.drawImage(sprite2,this.sx,this.sy);
 }
 
 
