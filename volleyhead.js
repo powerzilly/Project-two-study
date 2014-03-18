@@ -145,6 +145,56 @@ function dinamicaPalla(){
 	//Attrito laterale
 	if(myBall.dx > 0) myBall.dx -= 0.03;
 	if(myBall.dx < 0) myBall.dx += 0.03;	
+	
+	//Velociatà massima
+	var maxspeed = 15;
+	if(myBall.sx > maxspeed) myBall.dx = maxspeed;
+	if(myBall.sx < -maxspeed) myBall.dx = -maxspeed;
+	
+	//Urto la parete destra
+	if(myBall.sx >= (canvasWidth - myBall.rad)){
+		myBall.dx = -1*myBall.dx;
+		myBall.sx = canvasWidth - myBall.rad;
+	}
+	
+	//Urto la parete di sinistra
+	if(myBall.sx <= 0){
+		myBall.dx = -1*myBall.dx;
+		myBall.dx = 0;
+	}
+	
+	//Urto il personaggio destro
+	if((myBall.sx >(myRightPlayer.sx - myBall.rad))&&(myBall.sx < (myRightPlayer.sx + myBall.rad))&&(myBall.sy > (myRightPlayer.sy - 20 - myBall.rad))){
+		playSound(boing);
+		if(!game.start)game.start = true;
+		if(myBall.sy < (myRightPlayer.sy + 35 -myBall.rad)) myBall.dy = 5 + (myRightPlayer.vUP / 2) + ((Math.random()*3)-1.5);
+		//Palla va ->
+		if(myBall.dx > 0){
+			if(myBall.sx <= myRightPlayer.sx) myBall.dx = -1*myBall.dx;
+		}
+		//Palla va <-
+		if(myBall.dx < 0){
+			if(myBall.sx > myRightPlayer.sx) myBall.dx = -1*myBall.dx;
+		}
+		myBall.dx -= ((myRightPlayer.sx - myBall.sx) / 10);
+	}	
+	//Urto il personaggio sinistro
+	if((myBall.sx >(myLeftPlayer.sx - myBall.rad))&&(myBall.sx < (myLeftPlayer.sx + myBall.rad))&&(myBall.sy > (myLeftPlayer.sy + - 20 - myBall.rad))){
+		playSound(boing);
+		if(!game.start)game.start = true;
+		if(myBall.sy < (myLeftPlayer.sy + 35 -myBall.rad)) myBall.dy = 5 + (myLeftPlayer.vUP / 2) + ((Math.random()*3)-1.5);
+		//Palla va ->
+		if(myBall.dx > 0){
+			if(myBall.sx <= myLeftPlayer.sx) myBall.dx = -1*myBall.dx;
+		}
+		//Palla va <-
+		if(myBall.dx < 0){
+			if(myBall.sx > myLeftPlayer.sx) myBall.dx = -1*myBall.dx;
+		}
+		myBall.dx -= ((myLeftPlayer.sx - myBall.sx) / 10);
+	}
+	
+	//Urto la rete
 }
 
 
