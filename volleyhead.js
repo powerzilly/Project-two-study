@@ -195,8 +195,70 @@ function dinamicaPalla(){
 	}
 	
 	//Urto la rete
+	if((myBall.sx >= ((canvasWith / 2) -myBall.rad))&&(myBall.sx <= (canvasWhidth / 2))&&(myBall.sy > (canvasHeight - 240))){
+		if(myBall.sy < (canvasHeight -180)) myBall.dy =-1*myBall.dy;
+		
+		//La palla va ->
+		if(myBall.dx > 0){
+			if(myBall.sx <= ((canvasWidth /2)-(myBall.rad / 2))) myBall.dx =-1*myBall.dx;
+		}
+		//La palla va <-
+		if(myBall.dx < 0){
+			if(myBall.sx > ((canvasWidth /2)-(myBall.rad / 2))) myBall.dx =-1*myBall.dx;
+		}
+	}
 }
 
+function acquisizioneInput(){
+	if(Key.isDown(Key.LEFT1)){
+		if(myLeftPlayer.sx > -5){
+			myLeftPlayer.sx -= 8;
+			myLeftPlayer.pos--;
+		}
+	}
+	if(Key.idDown(Key.RIGHT1)){
+		if(myLeftPlaye.sx < (canvasWidth / 2)-55){
+			myLeftPlayer.sx +=8;
+			myLeftPlayer.pos ++;	
+ 		}
+	}
+	if(Key.isDown(Key.LEFT)){
+		if(myRightPlayer.sx > (canvasWidth / 2)){
+			myRightPlayer.sx -= 8;
+			myRightPlayer.pos ++;
+		}
+	}
+	if(Key.idDown(Key.RIGHT1)){
+		if(myRightPlaye.sx < (canvasWidth -50)){
+			myRightPlayer.sx +=8;
+			myRightlayer.pos --;	
+ 		}
+	}
+}
+
+function gameLoop(){
+	if(!game.pause){
+		myLeftPlayer.sxOld = myLeftPlayer.sx;
+		myLeftPlayer.syOld = myLeftPlayer.sy;
+		myRightPlayer.sxOld = myRightPlayer.sx;
+		myRightPlayer.syOld = myRightPlayer.sy;
+		myBall.sxOld = myBall.sx;
+		myBall.syOld = myBall.sy;
+		acquisizioneInput();
+		dinamicaGiocatori();
+		dinamicaPalla();
+		disegnaScena();
+	}
+}
+
+function rectBox(sx,sy,swidth,sheight,stylestring){
+	this.sx = sx;
+	this.sy = sy;
+	this.swidth = swidth;
+	this.sheight = sheight;
+	this.filstyle = stylestring;
+	this.draw = drawBox;
+}
 
 
 var canvas = document.getElementById("canvasvolley");
