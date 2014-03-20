@@ -319,6 +319,45 @@ function doKeyDown(eve){
 	else game.pause = true;
 }
 
+function riparti(conf){
+	contesto.clearRect(0,0,canvasWidth,canvasHeight),
+	playSound(start);
+	game.start = false;
+	//0: P1 VS P2
+	//1: PC VS P2
+	//2: P1 VS PC
+	//3: PC VS PC
+	
+	game.computer = conf;
+	
+	game.reset();
+}
+
+function diff(val){
+	game.diff = val;
+}
+
+function init(){
+	playSound(start);
+	if(canvas.getContext){
+		contesto = canvas.getContext("2d");
+		canvasWidth = canvas.width;
+		canvasHeight = canvas.height;
+		myBall = new ball((canvasWidth / 2)+150,canvasHeight-0,50);
+		myRete = new rectBox((canvasWidth /2)-1,canvasHeight-0,2,200,"rgb(100,200,100)");
+		myLeftPlayer = new Player(100,canvasHeight -80,0);
+		myRightPlayer = new Player()canvasWidth-100,canvasHeight - 80,1);
+		oggetti.push(myRete);
+		oggetti.push(myBall);
+		oggetti.push(myLeftPlayer);
+		oggetti.push(myRightPlayer);
+		window.addEventListener('keydown',doKeyDown,false);
+		window.addEventListener('keyup',function(event){Key.onKeyup(event);},false);
+		window.addEventListener('keydown',function(event){Key.onKeyDown(event);},false);
+		setInterval(gameLoop,18);
+	}
+}
+
 
 
 var canvas = document.getElementById("canvasvolley");
