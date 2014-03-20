@@ -260,6 +260,66 @@ function rectBox(sx,sy,swidth,sheight,stylestring){
 	this.draw = drawBox;
 }
 
+function  ball(sx,sy,rad){
+	this.sx = sx;
+	this.sy = sy;
+	this.sxOld = sx;
+	this.syOld = sy;
+	this.dx = 0;
+	this.dy = 0;
+	this.rad = rad;
+	this.draw = drawBall;
+}
+
+function Player(sx,sy,dir){
+	this.sx = sx;
+	this.sy = sy;
+	this.sxOld = sx;
+	this.syOld = sy;
+	this.vUP = 0;
+	this.draw = drawPlayer;
+	this.dir = dir;
+	this.pos = 0;
+}
+
+function disegnaScena(){
+	var i;
+	contesto.clearRect(myBall.sxOld -1,myBall.syOld -1,52,52);
+	contesto.clearRect(myLeftPlayer.sxOld -10,myLeftPlayer.syOld -30,80,120);
+	contesto.clearRect(myRightPlayer.sxOld -10,myRightPlayer.syOld -30,80,120);
+	contesto.clearRect(10,15,80,20);
+	contesto.fillStyle ="rgb(0,0,0)";
+	for(i=0;i<oggetti.legth;i++){
+		oggetti[i].draw();
+	}
+	contesto.font = "10pt Arial";
+	contesto.fillText('fps = '+fps,10,30);
+	FPS();
+}
+
+var Key = {
+	premuto:{},
+	LEFT:37,UP:38,RIGHT:39,DOWN:40,LEFT1:65,RIGHT1:68,UP1:87,
+	isDown:function[keyCode]{
+		return this.premuto[keyCode];
+	},
+	onKeydown: function(event){
+		this.premuto[event.keyCode]=true;
+	},
+	onKeyup: function(event){
+		delete this.premuto[event.keyCode];
+	}
+}
+
+function doKeyDown(eve){
+	var key = eve.keyCode;
+	if((key == 38)&&(myRightPlayer.sy > canvasHeight -90)) myRightPLayer.vUP = 17;
+	if((key == 87)&&(myLeftPlayer.sy > canvasHeight -90)) myLeftPlayer.vUP = 17;
+	if(key == 80)if(game.pause == true) game.pause = false;
+	else game.pause = true;
+}
+
+
 
 var canvas = document.getElementById("canvasvolley");
 
