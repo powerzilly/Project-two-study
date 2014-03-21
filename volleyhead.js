@@ -9,7 +9,7 @@ function FPS(){
 }
 
 //Controllo stato, punteggi e parametri di configurazione
-var game = {
+var game={
 	pause:false,
 	puntiPlayer1:0,
 	puntiPlayer2:0,
@@ -64,7 +64,7 @@ function dinamicaGiocatori(){
 			}
 		}
 		if(myBall.sx < myLeftPlayer.sx + 15){
-			if(myPLayer.sx > -5){
+			if(myLeftPlayer.sx > -5){
 				myLeftPlayer.sx -= (8 + game.diff);
 				myLeftPlayer.pos --;
 			}
@@ -122,7 +122,7 @@ function dinamicaPalla(){
 	myBall.sx += myBall.dx;
 	
 	//Urto terreno
-	if(myBall.sy >= canvasHeigth -50){
+	if(myBall.sy >= canvasHeight -50){
 		game.start = false;
 		myBall.dx = 0;
 		myBall.dy = 0;
@@ -229,9 +229,9 @@ function acquisizioneInput(){
 		}
 	}
 	if(Key.isDown(Key.RIGHT1)){
-		if(myRightPlaye.sx < (canvasWidth -50)){
+		if(myRightPlayer.sx < (canvasWidth -50)){
 			myRightPlayer.sx +=8;
-			myRightlayer.pos --;	
+			myRightPlayer.pos --;	
  		}
 	}
 }
@@ -297,7 +297,7 @@ function disegnaScena(){
 	FPS();
 }
 
-var Key = {
+var Key={
 	premuto:{},
 	LEFT:37,UP:38,RIGHT:39,DOWN:40,LEFT1:65,RIGHT1:68,UP1:87,
 	isDown:function(keyCode){
@@ -337,6 +337,7 @@ function diff(val){
 	game.diff = val;
 }
 
+
 function init(){
 	playSound(start);
 	if(canvas.getContext){
@@ -366,10 +367,10 @@ var oggetti=[];
 
 var canvasWidth;
 
-var canvasHeigth;
+var canvasHeight;
 
 var sprite1 = new Image();
-sprite1.src = "./sprites/walk2.png;"//Sprite delle gambe animate
+sprite1.src = "./sprites/walk2.png";//Sprite delle gambe animate
 
 var sprite2 = new Image();
 sprite2.src ="./sprites/palla.png";//Palla
@@ -378,7 +379,7 @@ var face1 = new Image();
 face1.src = "./sprites/face5.png";//Testa sinistra
 
 var face2 = new Image();
-face2.src = ":/sprites/face4.png";//Testa destra
+face2.src = "./sprites/face4.png";//Testa destra
 
 var counter = 0,fps = 0,frameTime = new Date().getTime();
 
@@ -389,13 +390,14 @@ var win = new Audio("./suoni/applause.wav");
 var start = new Audio("./suoni/wo.wav");
 
 
+
 /*function init(){
 
 	playSound(start);
 	if(canvas.getContext){
 		contesto = canvas.getContext("2d");
 		canvasWidth = canvas.width;
-		canvasHeigth = canvas.height;
+		canvasHeight = canvas.height;
 		
 		myBall = new ball((canvasWidth / 2)+150,canvasHeight-200,50);
 		
@@ -435,8 +437,8 @@ function ball(sx,sy,rad){
 
 function drawBall(){
 	contesto.drawImage(sprite2,this.sx,this.sy);
-}
+}*/
 
-*/
+
 
 
