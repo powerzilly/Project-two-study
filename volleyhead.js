@@ -69,13 +69,13 @@ function dinamicaGiocatori(){
 				myLeftPlayer.pos --;
 			}
 		}
-		if((myBall.sy > (canvasHeight - 260))&&(myBall.sx > myLeftPlayer.sx - 45)&&(myLeftPLayer.sx + 35)&&(myLeftPLayer.sy > (canvasHeight - 90))) myLeftPLayer.vUP = 17;
+		if((myBall.sy > (canvasHeight - 260))&&(myBall.sx > myLeftPlayer.sx - 45)&&(myLeftPlayer.sx + 35)&&(myLeftPlayer.sy > (canvasHeight - 90))) myLeftPlayer.vUP = 17;
 	}
 	
 	if((game.computer == 2)||(game.computer == 3)){
 		//Right
 		if(myBall.sx > myRightPlayer.sx + 15){
-			if(myRightPLayer.sx < canvasWidth - 50){
+			if(myRightPlayer.sx < canvasWidth - 50){
 				myRightPlayer.sx += (8 + game.diff);
 				myRightPlayer.pos -= 1;
 			}
@@ -86,7 +86,7 @@ function dinamicaGiocatori(){
 				myRightPlayer.pos += 1;
 			}
 		}
-		if((myBall.sy > (canvasHeight - 260))&&(myBall.sx > myRightPlayer.sx - 35)&&(myBall.sx < myRightPLayer.sx + 45)&&(myRightPlayer.sy > (canvasHeight - 90))) myRightPLayer.vUP = 17;
+		if((myBall.sy > (canvasHeight - 260))&&(myBall.sx > myRightPlayer.sx - 35)&&(myBall.sx < myRightPlayer.sx + 45)&&(myRightPlayer.sy > (canvasHeight - 90))) myRightPlayer.vUP = 17;
 		
 	}
 }
@@ -195,7 +195,7 @@ function dinamicaPalla(){
 	}
 	
 	//Urto la rete
-	if((myBall.sx >= ((canvasWith / 2) -myBall.rad))&&(myBall.sx <= (canvasWhidth / 2))&&(myBall.sy > (canvasHeight - 240))){
+	if((myBall.sx >= ((canvasWidth / 2) -myBall.rad))&&(myBall.sx <= (canvasWidth / 2))&&(myBall.sy > (canvasHeight - 240))){
 		if(myBall.sy < (canvasHeight -180)) myBall.dy =-1*myBall.dy;
 		
 		//La palla va ->
@@ -216,8 +216,8 @@ function acquisizioneInput(){
 			myLeftPlayer.pos--;
 		}
 	}
-	if(Key.idDown(Key.RIGHT1)){
-		if(myLeftPlaye.sx < (canvasWidth / 2)-55){
+	if(Key.isDown(Key.RIGHT1)){
+		if(myLeftPlayer.sx < (canvasWidth / 2)-55){
 			myLeftPlayer.sx +=8;
 			myLeftPlayer.pos ++;	
  		}
@@ -228,7 +228,7 @@ function acquisizioneInput(){
 			myRightPlayer.pos ++;
 		}
 	}
-	if(Key.idDown(Key.RIGHT1)){
+	if(Key.isDown(Key.RIGHT1)){
 		if(myRightPlaye.sx < (canvasWidth -50)){
 			myRightPlayer.sx +=8;
 			myRightlayer.pos --;	
@@ -300,7 +300,7 @@ function disegnaScena(){
 var Key = {
 	premuto:{},
 	LEFT:37,UP:38,RIGHT:39,DOWN:40,LEFT1:65,RIGHT1:68,UP1:87,
-	isDown:function[keyCode]{
+	isDown:function(keyCode){
 		return this.premuto[keyCode];
 	},
 	onKeydown: function(event){
@@ -346,14 +346,14 @@ function init(){
 		myBall = new ball((canvasWidth / 2)+150,canvasHeight-0,50);
 		myRete = new rectBox((canvasWidth /2)-1,canvasHeight-0,2,200,"rgb(100,200,100)");
 		myLeftPlayer = new Player(100,canvasHeight -80,0);
-		myRightPlayer = new Player()canvasWidth-100,canvasHeight - 80,1);
+		myRightPlayer = new Player(canvasWidth-100,canvasHeight - 80,1);
 		oggetti.push(myRete);
 		oggetti.push(myBall);
 		oggetti.push(myLeftPlayer);
 		oggetti.push(myRightPlayer);
 		window.addEventListener('keydown',doKeyDown,false);
 		window.addEventListener('keyup',function(event){Key.onKeyup(event);},false);
-		window.addEventListener('keydown',function(event){Key.onKeyDown(event);},false);
+		window.addEventListener('keydown',function(event){Key.onKeydown(event);},false);
 		setInterval(gameLoop,18);
 	}
 }
@@ -362,7 +362,7 @@ function init(){
 
 var canvas = document.getElementById("canvasvolley");
 
-var oggetti[];
+var oggetti=[];
 
 var canvasWidth;
 
@@ -389,7 +389,7 @@ var win = new Audio("./suoni/applause.wav");
 var start = new Audio("./suoni/wo.wav");
 
 
-function init(){
+/*function init(){
 
 	playSound(start);
 	if(canvas.getContext){
@@ -437,6 +437,6 @@ function drawBall(){
 	contesto.drawImage(sprite2,this.sx,this.sy);
 }
 
-
+*/
 
 
