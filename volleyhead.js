@@ -1,13 +1,4 @@
-/**
- * Volley di Testa Game 28/07/2011
- *
- * (C) 2011 Alessandro Di Pietrantonio - dipa_@hotmail.com
- * 
- * Please see: license.txt
- * You are welcome to use this code, but I would appreciate an email or tweet
- * if you do anything interesting with it!
-**/
-    
+
 function FPS()
 {
 	var frameTime2 = new Date().getTime() - frameTime;
