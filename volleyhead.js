@@ -289,7 +289,7 @@ function disegnaScena(){
 	contesto.clearRect(myRightPlayer.sxOld -10,myRightPlayer.syOld -30,80,120);
 	contesto.clearRect(10,15,80,20);
 	contesto.fillStyle ="rgb(0,0,0)";
-	for(i=0;i<oggetti.legth;i++){
+	for(i=0;i<oggetti.length;i++){
 		oggetti[i].draw();
 	}
 	contesto.font = "10pt Arial";
@@ -344,8 +344,8 @@ function init(){
 		contesto = canvas.getContext("2d");
 		canvasWidth = canvas.width;
 		canvasHeight = canvas.height;
-		myBall = new ball((canvasWidth / 2)+150,canvasHeight-0,50);
-		myRete = new rectBox((canvasWidth /2)-1,canvasHeight-0,2,200,"rgb(100,200,100)");
+		myBall = new ball((canvasWidth / 2)+150,canvasHeight-200,50);
+		myRete = new rectBox((canvasWidth /2)-1,canvasHeight-200,2,200,"rgb(100,200,100)");
 		myLeftPlayer = new Player(100,canvasHeight -80,0);
 		myRightPlayer = new Player(canvasWidth-100,canvasHeight - 80,1);
 		oggetti.push(myRete);
